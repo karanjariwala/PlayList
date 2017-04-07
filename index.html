@@ -1,0 +1,79 @@
+<!DOCTYPE html >
+<html ng-app='playListApp'>
+
+<head>
+    <title>Play List App</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- <script src="http://www.youtube.com/player_api"></script> -->
+</head>
+
+<body>
+    <div class="container" ng-controller="ListController">
+        <div class="row">
+            <p style="padding: 20px;"></p>
+            <div class="col-md-4">
+                <h4> Play List <span class="pull-right"><a href='' class='btn btn-primary' ng-click='play()'>Play</a></span></h4>
+                <p style="padding: 10px;"></p>
+                <div class="list-group" ng-repeat="video in videos track by $index">
+                    <a href="#" class="list-group-item active">{{video.title}}</a>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <h3 class="text-center">{{video.title}}</h3>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <youtube-video video-id="theBestVideo" player-vars="playerVars"></youtube-video>
+                    </div>
+                  
+                    <p style="padding: 20px;"></p>
+                    <div class="row">
+                        <form class="form-horizontal" ng-controller='FormController' ng-submit="addVideo()">
+                            <div class="form-group">
+                                <label for="inputTitle" class="col-sm-2 control-label">Title</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputTitle" placeholder="Title" ng-model='video.title'>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputURL" class="col-sm-2 control-label">URL</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputURL" placeholder="URL" ng-model='video.id'>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <label for="inputStart" class="col-sm-1 control-label">Start</label>
+                                    <div class="col-sm-5">
+                                        <input type="number" class="form-control" id="inputStart" placeholder="Start" ng-model="video.start">
+                                    </div>
+                                    <label for="inputEnd" step="any" class="col-sm-1 control-label">End</label>
+                                    <div class="col-sm-5">
+                                        <input type="number" step="any" class="form-control" id="inputEnd" placeholder="End" ng-model='video.end'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Add Video</button>
+                                </div>
+                            </div>
+                            <!-- {{video.url}}{{video.title}}{{video.start}}{{video.end}} -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <script type="text/javascript" src="app/scripts/app.js"></script>
+        <script type="text/javascript" src="app/scripts/controller.js"></script>
+        <script type="text/javascript" src="app/scripts/services.js"></script>
+        <!-- Include YT library and this directive -->
+        <script src="https://www.youtube.com/iframe_api"></script>
+        <script src="bower_components/angular-youtube-mb/src/angular-youtube-embed.js"></script>
+</body>
+
+</html>
